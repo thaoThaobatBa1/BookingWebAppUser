@@ -1,0 +1,21 @@
+<div class="login">
+  <div class="container">
+    <h1>Đăng Nhập</h1>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div>
+        <label for="email">Email</label>
+        <input class="input-group" type="email" id="email" name="email" [(ngModel)]="loginData.email" required>
+      </div>
+      <div class="password-group">
+        <label for="password">Mật Khẩu</label>
+        <input class="input-group" type="password" id="password" name="password" [(ngModel)]="loginData.password"
+          required [type]="isPasswordVisible ? 'text' : 'password'">
+        <span class="toggle-password mt-1" (click)="togglePassword()">
+          <i [ngClass]="isPasswordVisible ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+        </span>
+      </div>
+      <button type="submit" [disabled]="!loginForm.form.valid">Đăng Nhập</button>
+      <p class="register">Chưa có tài khoản? <a href="/dangki">Đăng ký ngay</a></p>
+    </form>
+  </div>
+</div>

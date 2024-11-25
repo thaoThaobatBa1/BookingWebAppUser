@@ -1,0 +1,185 @@
+<div>
+  <div class="baner">
+    <swiper-container class="mySwiper" pagination="true" effect="coverflow" grab-cursor="true" centered-slides="true"
+      slides-per-view="auto" coverflow-effect-rotate="50" coverflow-effect-stretch="0" coverflow-effect-depth="100"
+      coverflow-effect-modifier="1" coverflow-effect-slide-shadows="true" autoplay="true" autoplay-delay="1500">
+      @for (item of slides; track $index) {
+      <swiper-slide>
+        <img style="height: 100% ;width: 100%;" [src]='item.img' />
+      </swiper-slide>
+      }
+
+
+    </swiper-container>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script> -->
+
+  </div>
+
+  <section class="introduction">
+    <div class="intro-content row">
+      <div class="intro-text col-8 " style="width: 700px;">
+        <h2>Giới thiệu</h2>
+        <p>
+          Trong khi thưởng thức bữa ăn, khách hàng có thể tận
+          hưởng không gian ấm cúng và đầy âm nhạc của nhà hàng.
+          Một số nhà hàng còn có các chương trình giải trí như
+          ca nhạc, múa hát, những tiết mục trình diễn nghệ thuật để
+          tạo ra một không khí vui tươi và đầy sức sống cho khách hàng.
+        </p>
+        <p>Thứ hai - Chủ nhật 8:00AM - 11:00PM</p>
+        <p>+ 1-978-123-4567</p>
+      </div>
+      <div class="intro-images col-4">
+        <img src="assets/img/chef1.jpg" alt="Chef preparing food">
+        <img src="assets/img/chef2.jpg" alt="Chef cooking">
+      </div>
+    </div>
+  </section>
+  <div class="menu-container">
+    <div class="menu-item" *ngFor="let item of MenuItemlist">
+      <div class="menu-item-image">
+        <img [src]="'https://localhost:7097' + item.imageMenuItem" alt="{{ item.name }}">
+      </div>
+      <div class="menu-item-info">
+        <h3>{{ item.itemName }}</h3>
+        <p class="price">{{ item.price | currency }}</p>
+        <button class="btn btn-primary">Chi tiết</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="reservation-button">
+    <button class="btn btn-primary" (click)="showReservationForm()">Đặt bàn</button>
+  </div>
+
+  <div *ngIf="showReservationForm">
+    <div class="reservation-form">
+      <h2>Đặt bàn</h2>
+      <form>
+        <div class="form-group">
+          <label  for="name">Tên người đặt</label>
+          <input [(ngModel)]="customer.name" type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Số điện thoại</label>
+          <input [(ngModel)]="customer.phoneNumber" type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="guests">Số người</label>
+          <select id="guests" name="guests" required>
+            <option value="">Chọn số người</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="guests">Số bàn</label>
+          <select [(ngModel)]="" id="guests" name="guests" required>
+            <option value="">Chọn số bàn</option>
+            <option *ngFor="let table of tables" [value]="table.tableId">
+              {{ table.tableNumber }}
+            </option>
+          </select>
+        </div>
+
+       
+        <div class="form-group">
+          <label for="menu-items">Chọn món ăn</label>
+          <div class="menu-items-container">
+            <div class="menu-category">
+              <h3>Món khai vị</h3>
+              <div class="menu-items">
+                <div class="menu-item" *ngFor="let item of appetizers">
+                  <div class="menu-item-image">
+                    <img [src]="'https://localhost:7097' + item.imageMenuItem" alt="{{ item.name }}">
+                  </div>
+                  <div class="menu-item-info">
+                    <h4>{{ item.itemName }}</h4>
+                    <p class="price">{{ item.price | currency }}</p>
+                    <div class="quantity-control">
+                      <button class="btn btn-secondary" (click)="decreaseQuantity(item)">-</button>
+                      <input type="number" name="aa" [(ngModel)]="orderDetails[item.menuItemID]" min="0" max="10"
+                        class="quantity-input">
+                      <button class="btn btn-secondary" (click)="increaseQuantity(item)">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="menu-category">
+              <h3>Món chính</h3>
+              <div class="menu-items">
+                <div class="menu-item" *ngFor="let item of mainDishes">
+                  <div class="menu-item-image">
+                    <img [src]="'https://localhost:7097' + item.imageMenuItem" alt="{{ item.name }}">
+                  </div>
+                  <div class="menu-item-info">
+                    <h4>{{ item.itemName }}</h4>
+                    <p class="price">{{ item.price | currency }}</p>
+                    <div class="quantity-control">
+                      <button class="btn btn-secondary" (click)="decreaseQuantity(item)">-</button>
+                      <input type="number" name="bb" [(ngModel)]="orderDetails[item.menuItemID]" min="0" max="10"
+                        class="quantity-input">
+                      <button class="btn btn-secondary" (click)="increaseQuantity(item)">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="menu-category">
+              <h3>Đồ uống</h3>
+              <div class="menu-items">
+                <div class="menu-item" *ngFor="let item of drinks">
+                  <div class="menu-item-image">
+                    <img [src]="'https://localhost:7097' + item.imageMenuItem" alt="{{ item.name }}">
+                  </div>
+                  <div class="menu-item-info">
+                    <h4>{{ item.itemName }}</h4>
+                    <p class="price">{{ item.price | currency }}</p>
+                    <div class="quantity-control">
+                      <button class="btn btn-secondary" (click)="decreaseQuantity(item)">-</button>
+                      <input type="number" name="cc" [(ngModel)]="orderDetails[item.menuItemID]" min="0" max="10"
+                        class="quantity-input">
+                      <button class="btn btn-secondary" (click)="increaseQuantity(item)">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="menu-category">
+              <h3>Món tráng miệng</h3>
+              <div class="menu-items">
+                <div class="menu-item" *ngFor="let item of desserts">
+                  <div class="menu-item-image">
+                    <img [src]="'https://localhost:7097' + item.imageMenuItem" alt="{{ item.name }}">
+                  </div>
+                  <div class="menu-item-info">
+                    <h4>{{ item.itemName }}</h4>
+                    <p class="price">{{ item.price | currency }}</p>
+                    <div class="quantity-control">
+                      <button class="btn btn-secondary" (click)="decreaseQuantity(item)">-</button>
+                      <input type="number" name="dd" [(ngModel)]="orderDetails[item.menuItemID]" min="0" max="10"
+                        class="quantity-input">
+                      <button class="btn btn-secondary" (click)="increaseQuantity(item)">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button (click)="Order()" class="btn btn-primary">Đặt bàn</button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+</div>

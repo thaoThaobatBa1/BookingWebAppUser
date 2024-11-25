@@ -1,0 +1,331 @@
+.baner {
+    position: relative;
+    height: 100%;
+}
+
+.baner {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+swiper-container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 450px;
+    height: 300px;
+}
+
+swiper-slide img {
+    display: block;
+    width: 100%;
+}
+
+//css phần giới thiệu
+
+.introduction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    background-color: #f9f9f9;
+    /* Màu nền */
+}
+
+.intro-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: auto;
+    /* Chiều rộng tối đa */
+}
+
+.intro-text {
+    flex: 1;
+    padding: 20px;
+    color: #333;
+    /* Màu chữ */
+    margin-right: 50px;
+    /* Khoảng cách bên phải giữa văn bản và hình ảnh */
+    font-family: 'Roboto', sans-serif;
+    /* Kiểu chữ cho đoạn văn */
+    line-height: 1.6;
+    /* Khoảng cách giữa các dòng */
+}
+
+.intro-text h2 {
+    font-family: 'Pacifico', cursive;
+    /* Kiểu chữ nghệ thuật cho tiêu đề */
+    font-size: 2.5rem;
+    /* Kích thước tiêu đề lớn hơn */
+    margin-bottom: 15px;
+    /* Khoảng cách dưới tiêu đề */
+    font-weight: bold;
+    /* Đậm tiêu đề */
+    color: #2c3e50;
+    /* Màu sắc tiêu đề */
+}
+
+.intro-text p {
+    font-size: 1.1rem;
+    /* Kích thước chữ cho đoạn văn */
+    margin-bottom: 10px;
+    /* Khoảng cách giữa các đoạn */
+    color: #555;
+    /* Màu sắc chữ cho đoạn văn */
+}
+
+.intro-images {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    /* Căn giữa */
+    align-items: flex-start;
+    /* Căn trên để tránh đè lên chữ */
+}
+
+.intro-images img {
+    width: 100%;
+    /* Chiếm toàn bộ chiều rộng */
+    max-width: 400px;
+    /* Chiều rộng tối đa cho hình ảnh */
+    margin: 10px;
+    /* Khoảng cách giữa các hình ảnh */
+    border-radius: 10px;
+    /* Viền tròn cho hình ảnh */
+    transition: transform 0.3s;
+    /* Hiệu ứng chuyển động */
+}
+
+.intro-images img:first-child {
+    transform: translateY(-10px);
+    /* Đưa bức ảnh đầu tiên lên trên */
+}
+
+.intro-images img:last-child {
+    transform: translateY(10px);
+    /* Đưa bức ảnh thứ hai xuống dưới */
+}
+
+@media (max-width: 768px) {
+    .intro-content {
+        flex-direction: column;
+        /* Chuyển sang dạng cột */
+        align-items: center;
+        /* Căn giữa */
+    }
+
+    .intro-text {
+        margin-right: 0;
+        /* Bỏ khoảng cách bên phải */
+        margin-bottom: 20px;
+        /* Thêm khoảng cách dưới */
+        text-align: center;
+        /* Căn giữa văn bản */
+    }
+
+    .intro-images {
+        width: 100%;
+        /* Đảm bảo hình ảnh chiếm toàn bộ chiều rộng */
+        justify-content: center;
+        /* Căn giữa hình ảnh */
+    }
+
+    .intro-images img {
+        max-width: 100%;
+        /* Hình ảnh chiếm toàn bộ chiều rộng */
+    }
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item-image {
+    flex: 0 0 200px;
+    height: 200px;
+    overflow: hidden;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.menu-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-item-info {
+    flex: 1;
+    padding: 1.5rem;
+}
+
+.menu-item-info h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.menu-item-info .price {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.menu-item-info .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.reservation-form {
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f8f8;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reservation-form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .reservation-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .reservation-form label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .reservation-form input,
+  .reservation-form select,
+  .reservation-form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .reservation-form .menu-category {
+    margin-bottom: 30px;
+  }
+  
+  .reservation-form .menu-category h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .reservation-form .menu-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reservation-form .menu-item-image {
+    flex: 0 0 100px;
+    margin-right: 20px;
+  }
+  
+  .reservation-form .menu-item-image img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  
+  .reservation-form .menu-item-info h4 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .reservation-form .menu-item-info .price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .reservation-form .quantity-control {
+    display: flex;
+    align-items: center;
+  }
+  
+  .reservation-form .quantity-control button,
+  .reservation-form .quantity-control input {
+    margin-right: 10px;
+    padding: 5px 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .reservation-form .quantity-input {
+    width: 50px;
+    text-align: center;
+  }
+  
+  .reservation-form button.btn-primary {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reservation-form button.btn-primary:hover {
+    background-color: #0056b3;
+  }
+  .reservation-form {
+    display: none;
+  }
+  
+  .reservation-form.show {
+    display: flex;
+  }

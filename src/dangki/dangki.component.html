@@ -1,0 +1,40 @@
+<div class="registration-form">
+    <h2>Đăng Ký Tài Khoản</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="registrationData.Email"
+          name="email"
+          placeholder="Nhập địa chỉ email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Mật khẩu:</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="registrationData.Password"
+          name="password"
+          placeholder="Nhập mật khẩu"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Xác nhận mật khẩu:</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+          placeholder="Nhập lại mật khẩu"
+          required
+        />
+      </div>
+      <button type="submit" class="submit-button">Đăng Ký</button>
+    </form>
+  </div>
+  
