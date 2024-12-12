@@ -6,12 +6,12 @@
 }
 
 header {
-    background-color: white; /* Màu nền menu */
-    color: #845f5f; /* Màu chữ */
-    padding: 1rem 2rem; /* Tăng khoảng cách bên trong */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Đổ bóng sâu hơn */
-    position: relative; /* Để có thể định vị các phần tử khác */
-    animation: slideDown 0.5s ease; /* Hiệu ứng xuất hiện cho header */
+    background-color: white; 
+    color: #845f5f;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    position: relative; 
+    animation: slideDown 0.5s ease;
 }
 
 @keyframes slideDown {
@@ -34,50 +34,50 @@ nav ul {
     justify-content: space-between; 
 }
 nav ul li {
-    margin-right: 8px; /* Khoảng cách giữa các mục menu */
-    position: relative; /* Để định vị dropdown menu */
+    margin-right: 8px; 
+    position: relative; 
 }
 
 nav ul li:last-child {
-    margin-right: 0; /* Không có khoảng cách cho mục cuối */
+    margin-right: 0; 
 }
 
 nav ul li a {
-    color: #845f5f; /* Màu chữ liên kết */
+    color: #845f5f; 
     text-decoration: none;
-    padding: 10px 20px; /* Tăng khoảng cách cho nút */
-    border-radius: 25px; /* Viền tròn cho nút */
-    transition: background-color 0.3s, transform 0.2s, color 0.3s; /* Thêm hiệu ứng chuyển màu */
+    padding: 10px 20px; 
+    border-radius: 25px; 
+    transition: background-color 0.3s, transform 0.2s, color 0.3s; 
 }
 
 nav ul li a:hover {
-    background-color: rgba(132, 95, 95, 0.2); /* Hiệu ứng khi di chuột */
-    transform: scale(1.1); /* Phóng to một chút khi di chuột */
-    color: #fff; /* Đổi màu chữ khi di chuột để tăng độ tương phản */
+    background-color: rgba(132, 95, 95, 0.2); 
+    transform: scale(1.1);
+    color: #fff;
 }
 
 nav ul li .dropdown-menu {
-    display: none; /* Ẩn menu dropdown mặc định */
-    position: absolute; /* Định vị tuyệt đối */
-    background-color: white; /* Màu nền của dropdown */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho dropdown */
-    z-index: 1000; /* Đảm bảo dropdown nằm trên các phần tử khác */
+    display: none; 
+    position: absolute; 
+    background-color: white; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; 
 }
 
 nav ul li:hover .dropdown-menu {
-    display: block; /* Hiển thị dropdown khi hover */
+    display: block; 
 }
 .user-menu {
-    margin-left: auto; /* Đẩy phần tử này sang bên phải */
+    margin-left: auto;
 }
 .logo {
     height: 70px;
     margin-right: 20px;
-    transition: transform 0.3s; /* Thêm hiệu ứng cho logo */
+    transition: transform 0.3s;
 }
 
 .logo:hover {
-    transform: rotate(5deg); /* Hiệu ứng xoay nhẹ khi di chuột */
+    transform: rotate(5deg);
 }
 
 main {
@@ -103,9 +103,9 @@ footer {
     text-align: center;
     padding: 1rem;
     position: relative;
-    font-size: 0.9rem; /* Kích thước chữ nhỏ hơn cho footer */
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho footer */
-    animation: slideUp 0.5s ease; /* Hiệu ứng xuất hiện cho footer */
+    font-size: 0.9rem; 
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); 
+    animation: slideUp 0.5s ease;
 }
 
 @keyframes slideUp {
@@ -120,7 +120,7 @@ footer {
 }
 
 footer p {
-    margin: 0; /* Đặt lại khoảng cách cho văn bản footer */
+    margin: 0; 
 }
 
 .user-menu {
@@ -145,19 +145,19 @@ footer p {
 }
 @media (max-width: 768px) {
     .navbar-nav {
-        display: block; /* Hiện menu chính khi nhấn vào nút toggle */
+        display: block; 
     }
     
     .navbar-toggler {
-        display: block; /* Hiện button toggle */
+        display: block; 
     }
 
     .dropdown-menu {
-        display: none; /* Ẩn dropdown mặc định */
+        display: none; 
     }
 
     .dropdown.show .dropdown-menu {
-        display: block; /* Hiện dropdown khi class show được thêm */
+        display: block; 
     }
 }
 

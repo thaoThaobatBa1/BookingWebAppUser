@@ -8,10 +8,7 @@ export interface OderDetail {
   menuItemID: string
   orderID: string
 }
-interface SelectedMenuItem {
-  menuItemID: string;
-  quantity: number;
-}
+
 export interface Customer {
   name: string
   phoneNumber: string
@@ -24,8 +21,6 @@ export interface BookingToAdd {
   tableId: string
 }
 
-
-
 @Component({
   selector: 'app-trangchu',
   standalone: true,
@@ -36,42 +31,25 @@ export interface BookingToAdd {
 })
 export class TrangchuComponent implements OnInit {
 
-  orderDetail : OderDetail = {
+  orderDetail: OderDetail = {
     quantity: 0,
     menuItemID: "",
     orderID: "",
   }
 
-  customer : Customer = {
+  customer: Customer = {
     name: "",
     phoneNumber: ""
   }
 
-  bookingadd : BookingToAdd = {
+  bookingadd: BookingToAdd = {
     numberOfGuests: 0,
     customerId: '',
-    oderId: '',
+    oderId: "",
     tableId: '',
   }
 
- 
-
-
-
   showReservation: boolean = false;
-  showReservationForm() {
-    this.showReservation = !this.showReservation;
-    const reservationForm = document.querySelector('.reservation-form');
-    if (reservationForm) {
-      reservationForm.classList.toggle('show');
-    }
-    this.http.post("https://localhost:7097/api/Order", {}).subscribe((res: any) => {
-      localStorage.setItem("oderId", res.orderID)
-      console.log(res.orderID);
-
-    })
-
-  }
 
   tables: any[] = []
   appetizers: any[] = []
@@ -79,26 +57,6 @@ export class TrangchuComponent implements OnInit {
   drinks: any[] = []
   desserts: any[] = []
 
-
-  orderDetails: { [key: string]: number } = {};
-  increaseQuantity(item: any) {
-    if (this.orderDetails[item.menuItemID]) {
-      this.orderDetails[item.menuItemID]++;
-    } else {
-      this.orderDetails[item.menuItemID] = 1;
-    }
-  }
-  
-  decreaseQuantity(item: any) {
-    if (this.orderDetails[item.menuItemID]) {
-      if (this.orderDetails[item.menuItemID] > 0) {
-        this.orderDetails[item.menuItemID]--;
-      }
-      if (this.orderDetails[item.menuItemID] === 0) {
-        delete this.orderDetails[item.menuItemID];
-      }
-    }
-  }
   slides = [
     { img: 'assets/img/baner1.jpg' },
     { img: 'assets/img/baner2.jpg' },
@@ -111,6 +69,21 @@ export class TrangchuComponent implements OnInit {
   constructor(private http: HttpClient) {
 
   }
+
+  increaseQuantity(item: any): void {
+    if (item.quantity < 10) {
+      item.quantity++;
+      console.log(item.menuItemID)
+    }
+  }
+
+  decreaseQuantity(item: any): void {
+    if (item.quantity > 0) {
+      item.quantity--;
+      console.log(item.menuItemID)
+    }
+  }
+
   ngOnInit(): void {
     this.getAllMenuItem()
     this.GetAllAppetizer()
@@ -118,6 +91,16 @@ export class TrangchuComponent implements OnInit {
     this.GetAllDrinks()
     this.GetAllMainDishes()
     this.GetAllTables()
+    const userId = localStorage.getItem("userId")
+    const userName = localStorage.getItem("userName")
+    if (userId != null && userName != null) {
+      this.http.get(`https://localhost:7097/api/Customer/withUser${userId}`).subscribe((res: any) => {
+        this.customer.name = res.name
+        this.customer.phoneNumber = res.phoneNumber
+      }, error => {
+        this.customer.name = userName
+      })
+    }
   }
 
   getAllMenuItem(): void {
@@ -130,25 +113,25 @@ export class TrangchuComponent implements OnInit {
   }
 
   GetAllAppetizer() {
-    this.http.get("https://localhost:7097/api/BookingListInfo/get_khaivi").subscribe((res: any) => {
+    this.http.get("https://localhost:7097/api/BookingManagament/get_khaivi").subscribe((res: any) => {
       this.appetizers = res.$values
     })
   }
 
   GetAllMainDishes() {
-    this.http.get("https://localhost:7097/api/BookingListInfo/getAll_Thit").subscribe((res: any) => {
+    this.http.get("https://localhost:7097/api/BookingManagament/getAll_Thit").subscribe((res: any) => {
       this.mainDishes = res.$values
     })
   }
 
   GetAllDrinks() {
-    this.http.get("https://localhost:7097/api/BookingListInfo/getAll_NuocUong").subscribe((res: any) => {
+    this.http.get("https://localhost:7097/api/BookingManagament/getAll_NuocUong").subscribe((res: any) => {
       this.drinks = res.$values
     })
   }
 
   GetAllDesserts() {
-    this.http.get("https://localhost:7097/api/BookingListInfo/get_Trangmieng").subscribe((res: any) => {
+    this.http.get("https://localhost:7097/api/BookingManagament/get_Trangmieng").subscribe((res: any) => {
       this.desserts = res.$values
     })
   }
@@ -158,11 +141,56 @@ export class TrangchuComponent implements OnInit {
       this.tables = res.$values
     })
   }
-
-  Order(){
-    this.http.post("https://localhost:7097/api/Customer/",this.customer).subscribe((res : any) =>{
+  showReservationForm() {
+    this.showReservation = !this.showReservation;
+    const reservationForm = document.querySelector('.reservation-form');
+    if (reservationForm) {
+      reservationForm.classList.toggle('show');
+    }
+  }
+  Order() {
+    this.http.post("https://localhost:7097/api/Order", {}).subscribe((res: any) => {
+      const OrderId = res.orderID
+      const UserId = localStorage.getItem("userId")
       
+      if (UserId != null) {
+        const customerWithUser = {
+          name: this.customer.name,
+          phoneNumber: this.customer.phoneNumber,
+          userId: UserId
+        }
+        this.http.post("https://localhost:7097/api/Customer/WithUser", customerWithUser).subscribe((res: any) => {
+          this.AddMenuItem(OrderId,res.customerID)
+        })
+      } else {
+        this.http.post("https://localhost:7097/api/Customer/", this.customer).subscribe((res: any) => {
+          this.AddMenuItem(OrderId,res.customerID)
+        });
+      }
     })
+
   }
 
+
+  AddMenuItem(orderId : any,customerId : any) {
+    const combineMenu = this.appetizers.concat(this.desserts, this.mainDishes, this.drinks);
+    this.bookingadd.customerId = customerId;
+    this.bookingadd.oderId = orderId
+    this.http.post("https://localhost:7097/api/Booking", this.bookingadd).subscribe(() => {
+      combineMenu.forEach((menuItem: any) => {
+        if (menuItem.quantity > 0) {
+          const oderDetail = {
+            quantity: menuItem.quantity,
+            menuItemID: menuItem.menuItemID,
+            orderID: orderId
+          };
+
+          this.http.post("https://localhost:7097/api/OrderDetail/", oderDetail).subscribe(
+            (res: any) => { },
+
+          );
+        }
+      });
+    });
+  }
 }

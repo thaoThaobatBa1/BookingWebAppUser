@@ -38,7 +38,7 @@ swiper-slide img {
     align-items: center;
     padding: 40px;
     background-color: #f9f9f9;
-    /* Màu nền */
+  
 }
 
 .intro-content {
@@ -47,69 +47,69 @@ swiper-slide img {
     justify-content: space-between;
     width: 100%;
     max-width: auto;
-    /* Chiều rộng tối đa */
+  
 }
 
 .intro-text {
     flex: 1;
     padding: 20px;
     color: #333;
-    /* Màu chữ */
+    
     margin-right: 50px;
-    /* Khoảng cách bên phải giữa văn bản và hình ảnh */
+  
     font-family: 'Roboto', sans-serif;
-    /* Kiểu chữ cho đoạn văn */
+    
     line-height: 1.6;
-    /* Khoảng cách giữa các dòng */
+  
 }
 
 .intro-text h2 {
     font-family: 'Pacifico', cursive;
-    /* Kiểu chữ nghệ thuật cho tiêu đề */
+    
     font-size: 2.5rem;
-    /* Kích thước tiêu đề lớn hơn */
+  
     margin-bottom: 15px;
-    /* Khoảng cách dưới tiêu đề */
+   
     font-weight: bold;
-    /* Đậm tiêu đề */
+   
     color: #2c3e50;
-    /* Màu sắc tiêu đề */
+    
 }
 
 .intro-text p {
     font-size: 1.1rem;
-    /* Kích thước chữ cho đoạn văn */
+   
     margin-bottom: 10px;
-    /* Khoảng cách giữa các đoạn */
+   
     color: #555;
-    /* Màu sắc chữ cho đoạn văn */
+    
 }
 
 .intro-images {
     flex: 1;
     display: flex;
     justify-content: center;
-    /* Căn giữa */
+   
     align-items: flex-start;
-    /* Căn trên để tránh đè lên chữ */
+   
 }
 
 .intro-images img {
     width: 100%;
-    /* Chiếm toàn bộ chiều rộng */
+   
     max-width: 400px;
-    /* Chiều rộng tối đa cho hình ảnh */
+   
     margin: 10px;
-    /* Khoảng cách giữa các hình ảnh */
+   
     border-radius: 10px;
-    /* Viền tròn cho hình ảnh */
+    
     transition: transform 0.3s;
-    /* Hiệu ứng chuyển động */
+   
 }
 
 .intro-images img:first-child {
     transform: translateY(-10px);
-    /* Đưa bức ảnh đầu tiên lên trên */
+  
 }
 
 .intro-images img:last-child {

@@ -15,13 +15,13 @@ export class LayoutComponent {
   username: string | null = null
   constructor(private router: Router) {
     if (typeof window !== 'undefined') {
-      this.username = localStorage.getItem('username');
+      this.username = localStorage.getItem('userName');
     }
   }
 
   logout() {
     this.username = null
-    localStorage.removeItem('username')
+    localStorage.removeItem('userName')
     localStorage.removeItem('token')
 
     this.router.navigateByUrl('/');

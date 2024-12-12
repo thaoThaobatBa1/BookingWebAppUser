@@ -36,7 +36,9 @@ export class LoginComponent {
           alert("Đăng nhập thành công")
           if (typeof window !== 'undefined') {
             localStorage.setItem('token', res.token)
-            localStorage.setItem('username', this.loginData.email);
+            localStorage.setItem('userName', this.loginData.email);
+            localStorage.setItem("userId",res.id)
+            
           }
 
           this.router.navigateByUrl('/layout/trangchu')
