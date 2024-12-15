@@ -151,8 +151,9 @@ export class TrangchuComponent implements OnInit {
   Order() {
     this.http.post("https://localhost:7097/api/Order", {}).subscribe((res: any) => {
       const OrderId = res.orderID
+      localStorage.setItem("orderId", res.orderID)
       const UserId = localStorage.getItem("userId")
-      
+
       if (UserId != null) {
         const customerWithUser = {
           name: this.customer.name,
@@ -160,19 +161,20 @@ export class TrangchuComponent implements OnInit {
           userId: UserId
         }
         this.http.post("https://localhost:7097/api/Customer/WithUser", customerWithUser).subscribe((res: any) => {
-          this.AddMenuItem(OrderId,res.customerID)
+          this.AddMenuItem(OrderId, res.customerID)
+          alert("đặt hàng thành công")
         })
       } else {
         this.http.post("https://localhost:7097/api/Customer/", this.customer).subscribe((res: any) => {
-          this.AddMenuItem(OrderId,res.customerID)
+          this.AddMenuItem(OrderId, res.customerID)
+          alert("đặt hàng thành công")
         });
       }
     })
 
   }
 
-
-  AddMenuItem(orderId : any,customerId : any) {
+  AddMenuItem(orderId: any, customerId: any) {
     const combineMenu = this.appetizers.concat(this.desserts, this.mainDishes, this.drinks);
     this.bookingadd.customerId = customerId;
     this.bookingadd.oderId = orderId
@@ -192,5 +194,35 @@ export class TrangchuComponent implements OnInit {
         }
       });
     });
+  }
+
+  isPay: boolean = false
+  Pay() {
+    const oderId = localStorage.getItem("orderId")
+    if (oderId != null) {
+      this.http.get("https://localhost:7097/api/BookingManagament").subscribe((res: any) => {
+        res.$values.forEach((item : any)=>{
+          if(item.orderID == oderId){
+            const paymentInfomation = {
+              orderType: "other",
+              amount: item.deposit,
+              orderDescription: "Thanh toán hoá đơn cọc đặt bàn",
+              name: item.nameOfGuest
+            }
+
+            this.http.post("https://localhost:7097/api/Payment/VnPay", paymentInfomation).subscribe((res: any) => {
+          
+              window.location.href = res.paymentUrl;
+            
+          }, error => {
+            console.error("Lỗi khi gửi yêu cầu thanh toán:", error);
+          })
+          }
+        })
+        
+        
+      })
+    }
+
   }
 }

@@ -7,9 +7,10 @@ import { ThucdonComponent } from './thucdon/thucdon.component';
 import { LienheComponent } from './lienhe/lienhe.component';
 import { DanhgiaComponent } from './danhgia/danhgia.component';
 import { DangkiComponent } from '../dangki/dangki.component';
+import { PaymentResultComponent } from './payment-result/payment-result.component';
 
 export const routes: Routes = [
-
+    { path: 'payment-result', component: PaymentResultComponent },
     {
         path: "",
         redirectTo: 'layout/trangchu',

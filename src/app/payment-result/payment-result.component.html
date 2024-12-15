@@ -1,0 +1,16 @@
+<div class="payment-result-container">
+    <h1>Kết quả thanh toán</h1>
+  
+    <div *ngIf="vnpResponseCode === '00'; else failureTemplate">
+      <p class="success">Thanh toán thành công!</p>
+      <p>Số tiền: {{ vnpAmount | currency :'VND':'symbol' }}</p>
+      <p>Mã giao dịch: {{ vnpTxnRef }}</p>
+    </div>
+  
+    <ng-template #failureTemplate>
+      <p class="failure">Thanh toán thất bại!</p>
+      <p>Vui lòng kiểm tra lại hoặc liên hệ hỗ trợ.</p>
+    </ng-template>
+  
+    <button routerLink="/trangchu">Quay lại trang chủ</button>
+  </div>
